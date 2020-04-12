@@ -40,7 +40,7 @@ export LC_CTYPE=en_US.UTF-8
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 # powerline location
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+#source ~/powerlevel10k/powerlevel10k.zsh-theme
 #source /home/bit/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #autoload -U +X bashcompinit && bashcompinit
 export GOPATH=$HOME/go

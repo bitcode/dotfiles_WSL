@@ -1,25 +1,20 @@
-
-
-# Setting PATH for Python 3.7
-# The original version is saved in .zprofile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
-export PATH
-
-# Setting PATH for Python 2.7
-# The original version is saved in .zprofile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-export PATH
-
+#------- Aliases ---------
+alias win='cd /mnt/c/Users/mylam'
+alias rc='rustc'
+alias dc='cd ..'
 alias tsource='tmux source-file ~/.tmux.conf'
 alias c='clear'
-alias DOT='$HOME/.dotfiles'
 alias grg='go run main.go'
+alias lz='ls -alZ | more'
+#------- Aliases for collection of  
+
 # recon
 hgrip(){
 history | grep $1
 }
 
 #----- AWS -------
+
 
 s3ls(){
 aws s3 ls s3://$1
@@ -30,6 +25,8 @@ aws s3 cp $2 s3://$1
 }
 
 #----- misc -----
+
+# 
 certspotter(){
 curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1
 } #h/t Michiel Prins
@@ -69,3 +66,13 @@ python knockpy.py -w list.txt $1
 ncx(){
 nc -l -n -vv -p $1 -k
 }
+
+#------SiteMap Script -----
+sitemap(){
+lynx -dump "http://hackerone.com" | sed -n '/^References$/,$p' | grep -E '[[:digit:]]+\.' | awk '{print $2}' | cut -d\? -f1 | sort | uniq
+}
+
+LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export RUST_SRC_PATH=/usr/local/src/rust/src

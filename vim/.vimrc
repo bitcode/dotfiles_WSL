@@ -8,6 +8,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'bash-support.vim'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'maxmellon/vim-jsx-pretty'
@@ -37,45 +38,32 @@ filetype plugin indent on    " required
 language en_US.UTF8
 syntax enable
 syntax on
+colorscheme gruvbox
 
 set showmatch mat=2
 set background=dark
 set cursorline
-colorscheme gruvbox
 set term=xterm-256color
 set encoding=utf8
 set backspace=indent,eol,start
 set number
-
 set wildmenu
 set wildignore=*.o,*~,*/.git/*,*/target/*
-
-set guifont=Iosevka\ Regular:h16
-if has("gui_running")
-  if has("gui_gtk2")
-    set guifont=Inconsolata\ 12
-  elseif has("gui_macvim")
-    set guifont=Menlo\ Regular:h14
-  elseif has("gui_win32")
-    set guifont=Consolas:h11:cANSI
-  endif
-endif
-
 set mouse=a
 set clipboard=unnamedplus
 set laststatus=2
+set guifont=Iosevka\ Regular:h16
 
-" ----- Plugin Specific Settings ---------
+" -------- UI Settings ---------
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
-let python_highlight_all = 1
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_symbols = 'unicode'
 let g:onedark_terminal_italics = 1
 let g:rainbow_active = 1
 
-" ----- golang syntax highlighting --------
+" ----- Go Plugin Settings highlighting --------
 
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -90,7 +78,6 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
-" golang settings
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
 
@@ -107,6 +94,32 @@ let g:NERDTreeHighlightFoldersFullName = 1
 
 let g:racer_experimental_completer = 1
 let g:rustfmt_autosave = 1
+let g:racer_insert_paren = 1
+
+" ----- Typescript Plugin Settings -----
+
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+"let g:typescript_ignore_browserwords
+
+" ------ JSX Pretty Plugin Settings -----
+
+let g:vim_jsx_pretty_highlight_close_tag = 1
+let g:vim_jsx_pretty_colorful_config = 1
+
+" vim-racer enables C-x-C-o to search for completion
+" Example Mappings
+
+augroup Racer
+    autocmd!
+    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def)
+    autocmd FileType rust nmap <buffer> gs         <Plug>(rust-def-split)
+    autocmd FileType rust nmap <buffer> gx         <Plug>(rust-def-vertical)
+    autocmd FileType rust nmap <buffer> gt         <Plug>(rust-def-tab)
+    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
+augroup END
 
 " ----- Remap yank & paste -------------
 

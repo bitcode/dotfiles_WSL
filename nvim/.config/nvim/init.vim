@@ -25,7 +25,8 @@ Plug '~/my-prototype-plugin'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
-Plug 'VundleVim/Vundle.vim'
+Plug 'scrooloose/syntastic'
+Plug 'luochen1990/rainbow'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -68,6 +69,10 @@ set mouse=a
 set clipboard=unnamedplus
 set laststatus=2
 set guifont=Iosevka\ Regular:h16
+
+" ----- Rainbow parenthesis settings -----
+
+let g:rainbow_active = 1
 
 " ------- 256 ColorTerm -----------------
 
@@ -115,6 +120,8 @@ let g:NERDTreeHighlightFoldersFullName = 1
 let g:racer_experimental_completer = 1
 let g:rustfmt_autosave = 1
 let g:racer_insert_paren = 1
+let g:rust_clip_command = 'xclip -selection clipboard'
+let g:rustc_path = $HOME."/bin/rustc"
 
 " ----- Typescript Plugin Settings -----
 
@@ -123,6 +130,16 @@ let g:typescript_compiler_options = ''
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 "let g:typescript_ignore_browserwords
+
+" ------ Syntastic Settings -------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " ------ JSX Pretty Plugin Settings -----
 

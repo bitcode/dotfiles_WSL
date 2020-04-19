@@ -48,4 +48,7 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" #loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
-export DOCKER_HOST=tcp://localhost:2375
+#export DOCKER_HOST=tcp://localhost:2375
+export PATH="$HOME/.cargo/bin:$PATH"
+source $HOME/.cargo/env
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -4,6 +4,7 @@ set nocompatible              " be iMproved, required
 filetype on                  " required                                        
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'neoclide/coc.nvim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'bash-support.vim'
@@ -121,6 +122,16 @@ augroup Racer
     autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
 augroup END
 
+" ----- Rust Language Server settings --
+
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+
 " ----- Remap yank & paste -------------
 
 vnoremap <C-c> "+y
@@ -142,3 +153,7 @@ function! StartUp()
     end
 endfunction
 autocmd VimEnter * call StartUp()
+
+" ----- Code of Completion Settings ---------
+
+

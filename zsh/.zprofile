@@ -5,8 +5,15 @@ alias dc='cd ..'
 alias tsource='tmux source-file ~/.tmux.conf'
 alias c='clear'
 alias grg='go run main.go'
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 alias lz='ls -alZ | more'
-#------- Aliases for collection of  
+#------- swap caps with escape ---
+
+setxkbmap -option caps:swapescape
 
 # recon
 hgrip(){
@@ -73,6 +80,6 @@ lynx -dump "http://hackerone.com" | sed -n '/^References$/,$p' | grep -E '[[:dig
 }
 
 LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
-
+source $HOME/.cargo/env
 export PATH="$HOME/.cargo/bin:$PATH"
-export RUST_SRC_PATH=/usr/local/src/rust/src
+# export RUST_SRC_PATH=/usr/local/src/rust/src

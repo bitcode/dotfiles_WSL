@@ -79,7 +79,3 @@ sitemap(){
 lynx -dump "http://hackerone.com" | sed -n '/^References$/,$p' | grep -E '[[:digit:]]+\.' | awk '{print $2}' | cut -d\? -f1 | sort | uniq
 }
 
-LS_COLORS=$LS_COLORS:'di=0;35:' ; export LS_COLORS
-source $HOME/.cargo/env
-export PATH="$HOME/.cargo/bin:$PATH"
-# export RUST_SRC_PATH=/usr/local/src/rust/src

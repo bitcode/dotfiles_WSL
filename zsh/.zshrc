@@ -20,36 +20,58 @@ plugins=(
 )
 ZSH_TMUX_AUTOSTART='true'
 source $ZSH/oh-my-zsh.sh
-# tab completion
-#autoload -U compinit
-#compinit
-# source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_DISABLE_COMPFIX='true'
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='mvim'
- fi
-# Kubenetes Kubectl auto-completion
-if [ $commands[kubectl] ]; then
-  source <(kubectl completion zsh)
-fi
-# display characters correctly over ssh
 export LC_CTYPE=en_US.UTF-8
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-# powerline location
-#source ~/powerlevel10k/powerlevel10k.zsh-theme
-#source /home/bit/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#autoload -U +X bashcompinit && bashcompinit
-export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" #loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
-#export DOCKER_HOST=tcp://localhost:2375
-#export PATH="$HOME/.cargo/bin:$PATH"
-#source $HOME/.cargo/env
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+
+#------- Aliases ---------
+
+alias win='cd /mnt/c/Users/mylam'
+alias rc='rustc'
+alias dc='cd ..'
+alias tsource='tmux source-file ~/.tmux.conf'
+alias c='clear'
+alias grg='go run main.go'
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+alias lz='ls -alZ | more'
+
+#------- swap caps with escape ---
+
+setxkbmap -option caps:swapescape
+
+#----- Recon Bash Scripts -----
+ 
+certspotter(){
+curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1
+} #h/t Michiel Prins
+
+crtsh(){
+curl -s https://crt.sh/\?q\=\%.$1\&output\=json | jq -r '.[].name_value' | sed 's/\*\.//g' | sort -u
+}
+
+certnmap(){
+curl https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1  | nmap -T5 -Pn -sS -i - -$
+} #h/t Jobert Abma
+
+certbrute(){
+cat $1.txt | while read line; do python3 dirsearch.py -e . -u "https://$line"; done
+}
+
+ipinfo(){
+curl http://ipinfo.io/$1
+}
+
+#------SiteMap Script -----
+
+sitemap(){
+lynx -dump "http://hackerone.com" | sed -n '/^References$/,$p' | grep -E '[[:digit:]]+\.' | awk '{print $2}' | cut -d\? -f1 | sort | uniq
+}
+

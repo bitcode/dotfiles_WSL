@@ -30,6 +30,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 filetype plugin indent on    " required
 
@@ -201,7 +202,9 @@ let g:mkdp_preview_options = {
     \ 'sequence_diagrams': {},
     \ 'flowchart_diagrams': {}
     \ }
+
 " normal/insert
+
 nmap <C-s> <Plug>MarkdownPreview
 nmap <M-s> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
@@ -237,6 +240,12 @@ if &term =~ '256color'
     " work properly when Vim is used inside tmux and GNU screen.
     set t_ut=
 endif
+" ------ Navigate Vim Panes with H, J, K, L ----
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " ------ NERDtree auto open w/ no args --------
 

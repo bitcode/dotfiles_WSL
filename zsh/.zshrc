@@ -1,4 +1,4 @@
-export ZSH="/home/bit/.oh-my-zsh"
+export ZSH="/home/bitcode/.oh-my-zsh"
 ZSH_THEME=powerlevel10k/powerlevel10k
 # Uncomment the following line to display red dots whilst waiting for completion.
  COMPLETION_WAITING_DOTS="true"
@@ -26,9 +26,9 @@ export LC_CTYPE=en_US.UTF-8
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" #loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+export PATH="$HOME/.cargo/bin:$PATH"
 
-#------- Aliases ---------
+# -------- Aliases ---------
 
 alias win='cd /mnt/c/Users/mylam'
 alias rc='rustc'
@@ -36,16 +36,7 @@ alias dc='cd ..'
 alias tsource='tmux source-file ~/.tmux.conf'
 alias c='clear'
 alias grg='go run main.go'
-alias ls='lsd'
-alias l='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
-alias lt='ls --tree'
-alias lz='ls -alZ | more'
-
-#------- swap caps with escape ---
-
-setxkbmap -option caps:swapescape
+alias launchchrome="\"/mnt/c/Program Files (x86)/Google/Chrome/Application/chrome.exe\""
 
 #----- Recon Bash Scripts -----
  
